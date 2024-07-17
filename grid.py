@@ -33,12 +33,10 @@ class Grid:
         for row_index, row in enumerate(self.cells):
             for col_index, cell in enumerate(row):
                 living_neighbors = self.__count_living_neighbors(row_index, col_index)
-                if cell.active and (living_neighbors == 2 or living_neighbors == 3):
-                    cell.set_active()
-                elif not cell.active and living_neighbors == 3:
-                    cell.set_active()
-                else:
-                    cell.set_inactive()
+                cell.set_future_state(living_neighbors)
+        for row_index, row in enumerate(self.cells):
+            for col_index, cell in enumerate(row):
+                cell.update_state()
 
     def draw(self, surface):
         for row in self.cells:

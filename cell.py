@@ -8,6 +8,7 @@ ACTIVE_COLOR = "#C0E5C8"
 class Cell(Rect):
     def __init__(self, pos: tuple, dimensions: tuple, active: bool = False):
         self.active = active
+        self.future_state = None
 
         super().__init__(pos, dimensions)
 
@@ -29,3 +30,15 @@ class Cell(Rect):
 
     def set_inactive(self):
         self.active = False
+
+    def set_future_state(self, no_living_neighbors: int):
+        if self.active and (no_living_neighbors == 2 or no_living_neighbors == 3):
+            self.future_state = True
+        elif not self.active and no_living_neighbors == 3:
+            self.future_state = True
+        else:
+            self.future_state = False
+
+    def update_state(self):
+        self.active = self.future_state
+
