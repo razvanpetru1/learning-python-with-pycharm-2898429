@@ -5,7 +5,7 @@ PADDING = 7
 
 
 class Grid:
-    def __init__(self, screen_dimensions: tuple, surface, width: int, height: int):
+    def __init__(self, screen_dimensions: tuple, width: int, height: int):
         self.width = width
         self.height = height
 
@@ -14,8 +14,9 @@ class Grid:
 
         cell_width, cell_height = (effective_width / width, effective_height / height)
         self.cells = [
-            [Cell((PADDING + x * (cell_width + CELL_OFFSET), PADDING + y * (cell_height + CELL_OFFSET)), (cell_width, cell_height)) for x in range(width)] for y in
-            range(height)]
+            [Cell((PADDING + x * (cell_width + CELL_OFFSET), PADDING + y * (cell_height + CELL_OFFSET)), (cell_width, cell_height))
+            for x in range(width)]
+            for y in range(height)]
 
     def __str__(self):
         output = ""
@@ -24,6 +25,15 @@ class Grid:
                 output += str(cell)
             output += "\n"
         return output
+
+    def get_cell(self, col: int, row: int):
+        if col < 0 or col >= self.width:
+            raise RuntimeError(
+                f"error getting cell at column {col}: expected column number between 0 and {self.width - 1}")
+        if row < 0 or row >= self.height:
+            raise RuntimeError(
+                f"error getting cell at row {row}: expected column number between 0 and {self.height - 1}")
+        return self.cells[row][col]
 
     def flip(self, col: int, row: int):
         if col < 0 or col >= self.width:
