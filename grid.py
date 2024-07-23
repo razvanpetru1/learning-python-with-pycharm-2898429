@@ -14,9 +14,8 @@ class Grid:
 
         cell_width, cell_height = (effective_width / width, effective_height / height)
         self.cells = [
-            [Cell((PADDING + x * (cell_width + CELL_OFFSET), PADDING + y * (cell_height + CELL_OFFSET)), (cell_width, cell_height))
-            for x in range(width)]
-            for y in range(height)]
+            [Cell((PADDING + x * (cell_width + CELL_OFFSET), PADDING + y * (cell_height + CELL_OFFSET)), (cell_width, cell_height)) for x in range(width)] for y in
+            range(height)]
 
     def __str__(self):
         output = ""

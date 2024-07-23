@@ -20,7 +20,7 @@ class TestCell(TestCase):
         inactive_test_cell = Cell((0, 0), (0, 0), active=False)
         for neighbor_count in range(9):
             inactive_test_cell.set_future_state(neighbor_count)
-            if neighbor_count == 4:
+            if neighbor_count == 3:
                 self.assertTrue(inactive_test_cell.future_state, f'future_state should be true for {neighbor_count} neighbors')
             else:
                 self.assertFalse(inactive_test_cell.future_state, f'future_state should be false for {neighbor_count} neighbors')
