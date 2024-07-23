@@ -14,8 +14,9 @@ class Grid:
 
         cell_width, cell_height = (effective_width / width, effective_height / height)
         self.cells = [
-            [Cell((PADDING + x * (cell_width + CELL_OFFSET), PADDING + y * (cell_height + CELL_OFFSET)), (cell_width, cell_height)) for x in range(width)] for y in
-            range(height)]
+            [Cell((PADDING + x * (cell_width + CELL_OFFSET), PADDING + y * (cell_height + CELL_OFFSET)), (cell_width, cell_height))
+            for x in range(width)]
+            for y in range(height)]
 
     def __str__(self):
         output = ""
@@ -51,6 +52,7 @@ class Grid:
                 cell.set_future_state(self.__count_living_neighbors(col_index, row_index))
 
     def update(self):
+        self.__compute_future_states()
         for row in self.cells:
             for cell in row:
                 cell.update()
